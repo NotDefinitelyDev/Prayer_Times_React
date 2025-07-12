@@ -28,7 +28,7 @@ function App() {
         }}
       >
         {/* زر تغيير الثيم */}
-        <Box sx={{ position: "fixed", top: 10, right: 10, zIndex: 999 }}>
+        <Box sx={{ position: "fixed", top: 15, right: 15, zIndex: 999 }}>
           <IconButton onClick={toggleTheme} color="inherit">
             {isDarkMode ? <Brightness7 /> : <Brightness4 />}
           </IconButton>
