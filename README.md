@@ -2,7 +2,7 @@
 
 A simple and responsive web application built with **React** to display daily Islamic prayer times based on the selected location (Egypt - Saudi Arabia) .
 
-This app uses **Axios** to fetch prayer times from a public API, and **Material UI** to create a clean and user-friendly interface.
+This app uses **Axios** to fetch prayer times from a public API (https://aladhan.com/v1), and **Material UI** to create a clean and user-friendly interface.
 
 ---
 
