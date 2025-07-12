@@ -32,6 +32,9 @@ body {
     text-align: center;
     font-size: 9px;
   }
+  .paddingCancle {
+    padding: 0px !important;
+  }
 }
 
 @keyframes pulse {

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import "./App.css";
 import { ThemeProvider, CssBaseline, IconButton, Box } from "@mui/material";
 import { lightTheme, darkTheme } from "./theme ";
 import { Brightness4, Brightness7 } from "@mui/icons-material";
@@ -18,6 +19,7 @@ function App() {
 
       {/* خلفية الصفحة بالكامل */}
       <Box
+        className="paddingCancle"
         sx={{
           minHeight: "100vh",
           minWidth: "100vw",
