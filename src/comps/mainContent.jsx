@@ -117,7 +117,8 @@ export default function MainContent() {
 
     if (city.name === "جمهورية مصر العربية") {
       timePerCity = moment.tz("Africa/Cairo");
-    } else if (city.name === "المملكة العربية السعودية") {
+    } else {
+      city.name === "المملكة العربية السعودية";
       timePerCity = moment.tz("Asia/Riyadh");
     }
 
@@ -125,25 +126,43 @@ export default function MainContent() {
 
     let prayerIndex = null;
 
-    if (
-      momentNow.isAfter(moment(timings["Fajr"], "hh:mm")) &&
-      momentNow.isBefore(moment(timings["Duhur"], "hh:mm"))
-    ) {
+    const today = momentNow.clone().format("YYYY-MM-DD");
+
+    const fajrTime = moment.tz(
+      `${today} ${timings["Fajr"]}`,
+      "YYYY-MM-DD HH:mm",
+      timePerCity.tz()
+    );
+    const dhuhrTime = moment.tz(
+      `${today} ${timings["Dhuhr"]}`,
+      "YYYY-MM-DD HH:mm",
+      timePerCity.tz()
+    );
+    const asrTime = moment.tz(
+      `${today} ${timings["Asr"]}`,
+      "YYYY-MM-DD HH:mm",
+      timePerCity.tz()
+    );
+    const maghribTime = moment.tz(
+      `${today} ${timings["Maghrib"]}`,
+      "YYYY-MM-DD HH:mm",
+      timePerCity.tz()
+    );
+    const ishaTime = moment.tz(
+      `${today} ${timings["Isha"]}`,
+      "YYYY-MM-DD HH:mm",
+      timePerCity.tz()
+    );
+
+    if (momentNow.isBefore(fajrTime)) {
+      prayerIndex = 0;
+    } else if (momentNow.isBefore(dhuhrTime)) {
       prayerIndex = 1;
-    } else if (
-      momentNow.isAfter(moment(timings["Duhur"], "hh:mm")) &&
-      momentNow.isBefore(moment(timings["Asr"], "hh:mm"))
-    ) {
+    } else if (momentNow.isBefore(asrTime)) {
       prayerIndex = 2;
-    } else if (
-      momentNow.isAfter(moment(timings["Asr"], "hh:mm")) &&
-      momentNow.isBefore(moment(timings["Maghrib"], "hh:mm"))
-    ) {
+    } else if (momentNow.isBefore(maghribTime)) {
       prayerIndex = 3;
-    } else if (
-      momentNow.isAfter(moment(timings["Maghrib"], "hh:mm")) &&
-      momentNow.isBefore(moment(timings["Isha"], "hh:mm"))
-    ) {
+    } else if (momentNow.isBefore(ishaTime)) {
       prayerIndex = 4;
     } else {
       prayerIndex = 0;
@@ -159,10 +178,9 @@ export default function MainContent() {
     );
 
     // Only For Fajr
-    if (nextPrayerTime.isSameOrBefore(momentNow)) {
+    if (prayerIndex === 0 && nextPrayerTime.isSameOrBefore(momentNow)) {
       nextPrayerTime.add(1, "day");
     }
-    //
 
     let reminaningTime = moment.duration(nextPrayerTime.diff(momentNow));
     setNextPrayTime(
