@@ -17,7 +17,6 @@ function App() {
     <ThemeProvider theme={activeTheme}>
       <CssBaseline />
 
-      {/* خلفية الصفحة بالكامل */}
       <Box
         className="paddingCancle"
         sx={{
@@ -29,14 +28,12 @@ function App() {
           padding: "50px",
         }}
       >
-        {/* زر تغيير الثيم */}
         <Box sx={{ position: "fixed", top: 15, right: 15, zIndex: 999 }}>
           <IconButton onClick={toggleTheme} color="inherit">
             {isDarkMode ? <Brightness7 /> : <Brightness4 />}
           </IconButton>
         </Box>
 
-        {/* المحتوى الرئيسي */}
         <MainContent />
       </Box>
     </ThemeProvider>
